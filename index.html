@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Studio Animasi</title>
+<style>
+:root{--ink:#14213d;--sky:#cfe9ff;--yel:#ffd84a;--mint:#5ee0a8;--pink:#ff9bb3;--lil:#c9b8ff;--blu:#8fd3ff;--org:#ffb35c;--mut:#4a5a7a}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--sky);color:var(--ink);font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;font-weight:700}
+#app{max-width:480px;margin:0 auto;min-height:100vh;padding:calc(18px + env(safe-area-inset-top)) 18px calc(24px + env(safe-area-inset-bottom))}
+h1{font-size:30px;line-height:1.1;letter-spacing:-.5px;margin:18px 0 8px}
+h2{font-size:19px;margin:14px 0 8px}
+p.sub{font-weight:600;color:var(--mut);font-size:15px;margin-bottom:14px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.top .t{flex:1;text-align:center;font-size:17px}
+.brand{font-size:20px;display:flex;align-items:center;gap:10px}
+.logo{width:40px;height:40px;background:var(--yel);border:3px solid var(--ink);border-radius:12px;box-shadow:3px 3px 0 var(--ink);display:grid;place-items:center}
+.box{border:3px solid var(--ink);border-radius:20px;box-shadow:4px 4px 0 var(--ink);background:#fff;padding:14px;margin:12px 0}
+button,.pill{font:inherit;color:var(--ink);border:3px solid var(--ink);border-radius:999px;background:#fff;padding:9px 16px;cursor:pointer}
+button:active{transform:translate(3px,3px);box-shadow:none!important}
+.round{width:44px;height:44px;padding:0;font-size:20px}
+.pill{display:inline-block;font-size:14px;padding:6px 12px;margin:0 6px 8px 0}
+.cta{display:block;width:100%;background:var(--yel);font-size:19px;padding:15px;border-radius:24px;box-shadow:4px 4px 0 var(--ink);margin-top:18px}
+.btn{box-shadow:3px 3px 0 var(--ink)}
+.lil{background:var(--lil)}.yel{background:var(--yel)}.mint{background:var(--mint)}.pink{background:var(--pink)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.card{border:3px solid var(--ink);border-radius:22px;box-shadow:4px 4px 0 var(--ink);padding:14px;min-height:140px;position:relative;cursor:pointer;text-align:left}
+.card .e{font-size:34px}.card b{display:block;font-size:19px;margin:8px 0 4px}.card span{font-size:14px;font-weight:700}
+.card.on::after{content:"✓";position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center}
+.card.off{opacity:.55}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.step{display:flex;align-items:center;gap:12px;padding:9px 0}
+.dot{width:34px;height:34px;border-radius:50%;border:3px solid var(--ink);display:grid;place-items:center;flex:none;font-size:14px}
+.dot.done{background:var(--mint)}.dot.run{background:var(--yel)}.dot.wait{border-style:dashed;background:#fff}
+.st{font-size:13px;padding:4px 10px;border:2px solid var(--ink);border-radius:999px;margin-left:auto}
+.bar{height:16px;border:3px solid var(--ink);border-radius:99px;overflow:hidden;width:130px;background:#fff}
+.bar i{display:block;height:100%;background:var(--mint)}
+.tog{width:64px;height:36px;border:3px solid var(--ink);border-radius:99px;background:#ccd;position:relative;padding:0;flex:none}
+.tog i{position:absolute;top:3px;left:4px;width:24px;height:24px;border-radius:50%;background:#fff;border:2px solid var(--ink);transition:left .15s}
+.tog.on{background:var(--ink)}.tog.on i{left:30px;background:var(--mint)}
+.hook{display:flex;gap:12px;align-items:center;cursor:pointer}
+.hook.on{background:var(--yel)}
+.hook small{display:block;color:var(--mut);font-weight:700;font-size:13px;margin-top:4px}.hook.on small{color:var(--ink)}
+.ltr{width:36px;height:36px;border-radius:50%;border:3px solid var(--ink);display:grid;place-items:center;flex:none}
+.hook.on .ltr{background:var(--ink);color:#fff}
+.sc{border:3px solid var(--ink);border-radius:14px;height:150px;background:linear-gradient(#1d4080 0 55%,#13295a 55%);display:grid;place-items:center;font-size:56px;margin:10px 0}
+.prompt{border:3px dashed var(--ink);border-radius:16px;background:var(--sky);padding:12px;font-size:14px;font-weight:700;margin:10px 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.player{background:var(--ink);color:#fff;border:3px solid var(--ink);border-radius:20px;padding:14px;margin:12px 0}
+.player .play{background:var(--yel);width:56px;height:56px;padding:0;font-size:22px;flex:none}
+.wave{display:flex;align-items:center;gap:4px;height:50px;margin:12px 0}
+.wave i{flex:1;background:#6b7590;border-radius:3px}.wave i.p{background:var(--yel)}
+textarea,input[type=text]{width:100%;font:inherit;color:var(--ink);border:3px solid var(--ink);border-radius:16px;padding:12px;background:#fff;resize:vertical}
+.tl{display:flex;gap:10px;padding:8px;border-radius:12px;font-size:15px;line-height:1.35}
+.tl.on{background:var(--yel);border:3px solid var(--ink)}.tl em{font-style:normal;flex:none}
+.thumb{border:3px solid var(--ink);border-radius:18px;box-shadow:4px 4px 0 var(--ink);height:190px;display:flex;align-items:center;justify-content:space-between;padding:16px;overflow:hidden}
+.thumb b{font-size:36px;line-height:.95;color:var(--yel);-webkit-text-stroke:2px var(--ink);paint-order:stroke fill;max-width:62%;word-break:break-word}
+.thumb .fish{font-size:76px}
+.th0{background:linear-gradient(#1d4080 0 70%,#13295a 70%)}.th1{background:var(--yel)}.th2{background:var(--lil)}
+.ti{display:flex;align-items:center;gap:12px;cursor:pointer}.ti.on{background:var(--yel)}
+.ti .c{width:34px;height:34px;border-radius:50%;border:3px solid var(--ink);display:grid;place-items:center;flex:none;background:#fff}.ti.on .c{background:var(--ink);color:#fff}
+.ti small{margin-left:auto;color:var(--mut);font-size:13px;flex:none}
+.pill.sel{background:var(--yel)}
+.toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:99px;font-size:14px;z-index:9}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const modes=[
+ {id:"seram",e:"👻",n:"Cerita seram",d:"8 sampai 12 menit, gaya gelap",c:"var(--lil)"},
+ {id:"fakta",e:"💡",n:"Fakta unik",d:"5 sampai 8 menit, cepat dan ringan",c:"var(--yel)"},
+ {id:"dongeng",e:"🧸",n:"Dongeng anak",d:"3 sampai 6 menit, warna cerah",c:"var(--mint)"},
+ {id:"motivasi",e:"🌞",n:"Motivasi",d:"4 sampai 7 menit, kisah penyemangat",c:"var(--pink)"},
+ {id:"sejarah",e:"🏛️",n:"Sejarah singkat",d:"8 sampai 10 menit, gaya komik",c:"var(--blu)"},
+ {id:"komedi",e:"😄",n:"Komedi harian",d:"2 sampai 5 menit, sketsa lucu",c:"var(--org)"}];
+const steps=[["Ide dan judul","done"],["Hook pembuka","done"],["Naskah narasi","done"],["Prompt adegan","run","12 dari 18 adegan"],["Voice over dan transkrip","wait"],["Thumbnail","wait"],["Paket upload","wait","Judul, deskripsi, tag, chapter"]];
+const hooks=[["Kita sudah mendarat di bulan, tapi dasar laut di planet sendiri masih penuh rahasia.","Pernyataan mengejutkan",92],["Bayangkan gelap total, tekanan yang meremukkan, dan makhluk yang belum punya nama.","Ajakan membayangkan",85],["Siapa yang lebih kita kenal: permukaan bulan atau dasar lautan kita sendiri?","Pertanyaan pemancing",78]];
+const voices=["Berat dan tenang","Ceria","Misterius","Ramah untuk anak"];
+const titles=["Kenapa Laut Dalam Lebih Misterius dari Luar Angkasa?","Rahasia Dasar Laut yang Belum Banyak Diketahui Orang","Turun ke Kedalaman Laut: Apa yang Sebenarnya Ada di Bawah Sana?"];
+const S={screen:"mode",mode:"fakta",auto:true,hook:0,voice:0,speed:1.0,playing:false,
+ transcript:"Kita sudah mendarat di bulan, tapi dasar laut di planet sendiri masih penuh rahasia.\nHari ini kita turun pelan-pelan, sampai ke tempat yang tidak pernah disentuh cahaya.\nSemakin dalam kita turun, semakin gelap dan semakin besar tekanan di sekeliling kita.",
+ thumbText:"Laut dalam lebih seram?",thumbVar:0,thumbStyle:"Kartun",title:0,
+ prompt:"Prompt gambar: kartun 2D, kapal selam kuning kecil menuruni laut gelap, lampu sorot, ikan bercahaya, biru tua, rasio 16:9"};
+const $=s=>document.querySelector(s);
+const go=s=>{stopSpeak();S.screen=s;render();window.scrollTo(0,0)};
+function toast(t){const d=document.createElement("div");d.className="toast";d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),1600)}
+function copy(t){(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast("Sudah disalin")).catch(()=>{const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy");toast("Sudah disalin")}catch(e){toast("Gagal menyalin")}a.remove()})}
+function stopSpeak(){if(window.speechSynthesis)speechSynthesis.cancel();S.playing=false}
+function togglePlay(){
+ if(!window.speechSynthesis){toast("Suara belum tersedia di perangkat ini");return}
+ if(S.playing){stopSpeak();render();return}
+ const u=new SpeechSynthesisUtterance(S.transcript);u.lang="id-ID";u.rate=S.speed;
+ u.pitch=[0.8,1.3,0.9,1.4][S.voice];u.onend=()=>{S.playing=false;render()};
+ speechSynthesis.speak(u);S.playing=true;render()}
+function srt(){const L=S.transcript.split("\n").filter(Boolean);const f=s=>{const m=Math.floor(s/60),x=s%60;return "00:"+String(m).padStart(2,"0")+":"+String(x).padStart(2,"0")+",000"};
+ let t=0;return L.map((l,i)=>{const d=Math.max(3,Math.round(l.split(" ").length/2.5));const r=(i+1)+"\n"+f(t)+" --> "+f(t+d)+"\n"+l+"\n";t+=d;return r}).join("\n")}
+function download(name,text){const a=document.createElement("a");a.href="data:text/plain;charset=utf-8,"+encodeURIComponent(text);a.download=name;a.click()}
+const back=(to,t,right="")=>`<div class="top"><button class="round btn" onclick="go('${to}')">←</button><span class="t">${t}</span>${right}</div>`;
+const V={
+mode(){const m=modes.find(x=>x.id===S.mode);return `
+<div class="top"><div class="brand"><div class="logo">▶</div>Studio Animasi</div></div>
+<h1>Channel animasi apa yang mau kamu bikin?</h1><p class="sub">Pilih satu mode. Gaya naskah, gambar, dan suara ikut menyesuaikan.</p>
+<div class="grid">${modes.map(x=>`<div class="card ${S.mode===x.id?"on":""}" style="background:${x.c}" onclick="S.mode='${x.id}';render()"><div class="e">${x.e}</div><b>${x.n}</b><span>${x.d}</span></div>`).join("")}</div>
+<button class="cta" onclick="go('episode')">Lanjut: tentukan topik →</button>`},
+episode(){const m=modes.find(x=>x.id===S.mode);return `
+${back("mode","Episode 12",'<span class="pill yel" style="margin:0">Dalam proses</span>')}
+<h1>Kenapa laut dalam lebih misterius dari luar angkasa?</h1>
+<span class="pill" style="background:${m.c}">${m.n}</span><span class="pill">Sekitar 7 menit</span><span class="pill">Bahasa Indonesia</span>
+<div class="box lil row"><div><b style="font-size:19px">Mode otomatis</b><p style="font-size:14px;margin-top:4px">Semua langkah jalan berurutan. Kamu cek hasil akhirnya.</p></div><button class="tog ${S.auto?"on":""}" onclick="S.auto=!S.auto;render()"><i></i></button></div>
+<div class="box"><div class="row"><b>3 dari 7 langkah selesai</b><div class="bar"><i style="width:43%"></i></div></div>
+${steps.map(s=>`<div class="step"><div class="dot ${s[1]}">${s[1]==="done"?"✓":s[1]==="run"?"•••":""}</div><div><div style="font-size:17px">${s[0]}</div>${s[2]?`<div style="font-size:13px;color:var(--mut)">${s[2]}</div>`:""}</div><span class="st ${s[1]==="done"?"mint":s[1]==="run"?"yel":""}">${{done:"Selesai",run:"Berjalan",wait:"Menunggu"}[s[1]]}</span></div>`).join("")}</div>
+<button class="cta" onclick="go('hook')">Lanjutkan: prompt adegan →</button>`},
+hook(){return `
+${back("episode","Hook dan naskah",'<button class="btn" onclick="copy(hooks[S.hook][0]+\'\\n\\n\'+S.transcript)">Salin semua</button>')}
+<div class="row" style="margin-top:14px"><h2 style="margin:0">Pilih hook pembuka</h2><button class="btn lil" onclick="toast(\'Buat ulang butuh layanan AI (belum tersambung)\')">⟳ Buat ulang</button></div>
+${hooks.map((h,i)=>`<div class="box hook ${S.hook===i?"on":""}" onclick="S.hook=${i};render()"><div class="ltr">${"ABC"[i]}</div><div style="flex:1">${h[0]}<small>${h[1]}</small></div><span class="st ${S.hook===i?"mint":""}">Skor ${h[2]}</span></div>`).join("")}
+<div class="box"><div class="row"><b style="font-size:18px">Adegan 3 dari 18</b><span class="st" style="background:var(--sky);margin:0">0:24 sampai 0:36</span></div>
+<div class="sc">🟡🐟</div><p style="font-size:17px">Semakin dalam kita turun, semakin gelap dan semakin besar tekanan di sekeliling kita.</p>
+<textarea class="prompt" rows="3" oninput="S.prompt=this.value">${S.prompt}</textarea>
+<div class="two"><button class="btn" onclick="toast('Buat ulang butuh layanan AI (belum tersambung)')">Buat ulang</button><button class="btn lil" onclick="copy(S.prompt)">Salin prompt</button></div></div>
+<button class="cta" onclick="go('voice')" style="margin-top:0">Buat semua prompt adegan →</button>`},
+voice(){const bars=Array.from({length:28},(_,i)=>10+((i*37)%40));return `
+${back("hook","Voice over",'<span class="pill" style="margin:0">18 adegan</span>')}
+<h2>Pilih karakter suara</h2>
+<div class="grid" style="gap:10px">${voices.map((v,i)=>`<div class="card ${S.voice===i?"on":""}" style="min-height:64px;padding:12px;background:${["var(--yel)","var(--mint)","var(--lil)","var(--pink)"][i]}" onclick="S.voice=${i};render()">🔊 ${v}</div>`).join("")}</div>
+<div class="player"><div class="row" style="justify-content:flex-start;gap:14px"><button class="play" onclick="togglePlay()">${S.playing?"❚❚":"▶"}</button><div><div style="font-size:19px">Narasi lengkap</div><div style="color:var(--blu);font-size:14px">${voices[S.voice]}, kecepatan ${S.speed.toFixed(1)}x</div></div></div>
+<div class="wave">${bars.map((h,i)=>`<i class="${i<10?"p":""}" style="height:${h}px"></i>`).join("")}</div>
+<div class="row"><span>Kecepatan</span><span>${[0.9,1.0,1.1].map(s=>`<button class="pill ${S.speed===s?"sel":""}" style="margin:0 0 0 6px" onclick="S.speed=${s};stopSpeak();render()">${s.toFixed(1)}x</button>`).join("")}</span></div></div>
+<div class="box"><div class="row"><b style="font-size:19px">Transkrip</b><span class="st" style="background:var(--sky)">Bisa diedit</span></div>
+<textarea rows="8" style="margin-top:10px" oninput="S.transcript=this.value">${S.transcript}</textarea></div>
+<div class="two"><button class="btn" onclick="toast('Unduh audio butuh layanan suara (belum tersambung)')">Unduh audio</button><button class="btn lil" onclick="download('subtitle.srt',srt())">Ekspor subtitle SRT</button></div>
+<button class="cta" onclick="go('thumb')">Lanjut: thumbnail →</button>`},
+thumb(){const w=S.thumbText.toUpperCase();return `
+${back("voice","Thumbnail dan judul",'<span class="pill" style="margin:0">3 varian</span>')}
+<div class="thumb th${S.thumbVar}" style="margin-top:14px"><b>${w}</b><span class="fish">🐡</span></div>
+<div class="grid" style="grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0">${["#1d4080","var(--yel)","var(--lil)"].map((c,i)=>`<div class="card ${S.thumbVar===i?"on":""}" style="min-height:64px;padding:0;background:${c}" onclick="S.thumbVar=${i};render()"></div>`).join("")}</div>
+<h2>Teks di thumbnail</h2><input type="text" value="${S.thumbText}" oninput="S.thumbText=this.value;document.querySelector('.thumb b').textContent=this.value.toUpperCase()">
+<div class="row" style="margin-top:12px;justify-content:flex-start;gap:8px;flex-wrap:wrap"><span style="font-size:14px">Gaya gambar</span>${["Kartun","Komik","Minimalis"].map(g=>`<button class="pill ${S.thumbStyle===g?"sel":""}" style="margin:0" onclick="S.thumbStyle='${g}';render()">${g}</button>`).join("")}</div>
+<h2 style="margin-top:18px">Judul rekomendasi</h2>
+${titles.map((t,i)=>`<div class="box ti ${S.title===i?"on":""}" onclick="S.title=${i};render()"><div class="c">${S.title===i?"✓":""}</div><span>${t}</span><small>${t.length} huruf</small></div>`).join("")}
+<div class="two" style="margin-top:6px"><button class="btn" onclick="copy(titles[S.title])">Salin judul</button><button class="btn yel" onclick="toast('Generate butuh layanan AI (belum tersambung)')">✦ Generate baru</button></div>`}
+};
+function render(){$("#app").innerHTML=V[S.screen]()}
+render();
+</script>
+</body>
+</html>
